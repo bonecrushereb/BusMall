@@ -44,8 +44,6 @@ function displayImage(imgDataObject) {
   //     oneEl.textContent = imgDataObjects[i];
   // }
 }
-
-
  displayImage(pic10);
 // displayImage(pic17);
 // displayImage(imgDataObjects[3]);
