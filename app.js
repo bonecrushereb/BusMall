@@ -39,6 +39,7 @@ function displayImage(imgDataObject) {
   var imageDisplaySection = document.getElementById('imgDisplay');
   var img1 = document.createElement('img');
   img1.setAttribute('src', imgDataObject.path);
+  img1.setAttribute('id', imgDataObject.elementid);
   imageDisplaySection.appendChild(img1);
   imgDataObject.timeShown++;
 }
@@ -74,7 +75,7 @@ function display3Images(){
 
 function threeNewImages() {
   var imageDisplaySection = document.getElementById('imgDisplay');
-  console.log('imageDisplaySection is', imageDisplaySection);
+  //console.log('imageDisplaySection is', imageDisplaySection);
   imageDisplaySection.textContent='';
   display3Images();
   imgEventListener();
@@ -82,7 +83,8 @@ function threeNewImages() {
 
 function imageClicked() {
   var clickedID = this.id;
-  for(var i=0; i <imgDataObjectArray.length;i++) {
+  console.log('click id is ' , clickedID);
+  for(var i=0; i < imgDataObjectArray.length; i++) {
     if (clickedID === imgDataObjectArray[i].elementid) {
       imgDataObjectArray[i].timeClicked++;
       console.log(clickedID);
