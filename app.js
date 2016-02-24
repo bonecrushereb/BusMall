@@ -39,5 +39,42 @@ function displayImage(imgDataObject) {
   img1.setAttribute('src', imgDataObject.path);
   imageDisplaySection.appendChild(img1);
 }
-// displayImage(usb);
-// displayImage(imgDataObjects[3]);
+displayImage(tauntaun);
+
+// function randomImages() {
+//   for (var i = 0; i < 3; i++) {
+//     var index1 = Math.floor(Math.random() * imageDisplay.length);
+//     oneEl.textContent = imageDisplay[index1];
+//
+//     var index2 = Math.floor(Math.random() * imageDisplay.length);
+//     if(index1 != index2 || index1 != index3) {
+//       twoEl.textContent = imageDisplay[index2];
+//     }
+//
+//     while(index1 === index2){
+//       var index2 = Math.floor(Math.random() * imageDisplay.length);
+//       if(index2 != index1 || index2 != index3){
+//         twoEl.textContent = imageDisplay[index2];
+//       }
+//     }
+//
+//     var index3 = Math.floor(Math.random() * imageDisplay.length);
+//     if(index3 != index2 || index3 != index1) {
+//       threeEl.textContent = imageDisplay[index3];
+//     }
+//     while(index3 === index2 || index3 === index1) {
+//       var index3 = Math.floor(Math.random() * imageDisplay.length);
+//       if(index3 != index1 || index3 != index2){
+//         threeEl.textContent = imageDisplay[index3];
+//       }
+//     }
+//   }
+// }
+// randomImages();
+//   // console.log(imageDisplay[index1]);
+//   // console.log(imageDisplay[index2]);
+//   // console.log(imageDisplay[index3]);
+//
+//
+// // displayImage(usb);
+// // displayImage(imgDataObjects[3]);
