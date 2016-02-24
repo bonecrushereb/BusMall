@@ -9,6 +9,7 @@ var picObject = function(imgName, path, elementid){
   this.timeClicked = 0;
   this.elementid = elementid;
   imgDataObjectArray.push(this);
+  //console.log(elementid);
 }
 
 
@@ -32,7 +33,6 @@ var unicorn = new picObject('unicorn', 'assets/img/unicorn.jpg','unicorn');
 var usb = new picObject('usb', 'assets/img/usb.gif', 'usb');
 var waterCan = new picObject('water-can', 'assets/img/water-can.jpg', 'waterCan');
 var wineGlass = new picObject('wine-glass', 'assets/img/wine-glass.jpg', 'wineGlass');
-
 // var lulwat = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
 
 function displayImage(imgDataObject) {
@@ -73,7 +73,8 @@ function display3Images(){
 }
 
 function threeNewImages() {
-  var imageDisplaySection = document.getElementById('imageDisplay');
+  var imageDisplaySection = document.getElementById('imgDisplay');
+  console.log('imageDisplaySection is', imageDisplaySection);
   imageDisplaySection.textContent='';
   display3Images();
   imgEventListener();
@@ -83,9 +84,11 @@ function imageClicked() {
   var clickedID = this.id;
   for(var i=0; i <imgDataObjectArray.length;i++) {
     if (clickedID === imgDataObjectArray[i].elementid) {
-      imgDataObjectArray[i].clicked++;
+      imgDataObjectArray[i].timeClicked++;
+      console.log(clickedID);
     }
   }
+  threeNewImages();
 }
 
 function imgEventListener(){
