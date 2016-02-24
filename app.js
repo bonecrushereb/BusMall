@@ -101,3 +101,47 @@ function imgEventListener(){
 }
 display3Images();
 imgEventListener();
+
+//Display Chart
+var imgName = [];
+var imgClicks = [];
+var imgShown = [];
+
+var data = {
+  labels: [],
+  datasets: [
+    {
+      label: "Clicks",
+      fillColor: "rgba(220,220,220,0.5)",
+      strokeColor: "rgba(220,220,220,0.8)",
+      highlightFill: "rgba(220,220,220,0.75)",
+      highlightStroke: "rgba(220,220,220,1)",
+      data: []
+    },
+    {
+      label: "Displayed",
+      fillColor: "rgba(151,187,205,0.5)",
+      strokeColor: "rgba(151,187,205,0.8)",
+      highlightFill: "rgba(151,187,205,0.75)",
+      highlightStroke: "rgba(151,187,205,1)",
+      data: []
+    }
+  ]
+};
+
+function dataArray(){
+
+  for(var i = 0; i < imgDataObjectArray.length; i++){
+    data.labels.push(imgDataObjectArray[i].imgName);
+    data.datasets.data.push(imgDataObjectArray[i].timeShown);
+    data.datasets.data.push(imgDataObjectArray[i].timeClicked);
+  }
+  console.log(imgName);
+  console.log(timeShown);
+  console.log(timeClicked);
+}
+dataArray();
+
+
+var ctx = document.getElementById("myChart").getContext("2d");
+var myBarChart = new Chart(ctx).Bar(data);
