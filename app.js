@@ -3,6 +3,8 @@
 var imgDataObjectArray = [];
 var tallyRenders = 0;
 var clickDisplayChart = null;
+var storedProductData;
+var productData;
 
 var picObject = function(imgName, path, elementid){
   this.imgName = imgName;
@@ -36,6 +38,32 @@ var usb = new picObject('usb', 'assets/img/usb.gif', 'usb');
 var waterCan = new picObject('water-can', 'assets/img/water-can.jpg', 'waterCan');
 var wineGlass = new picObject('wine-glass', 'assets/img/wine-glass.jpg', 'wineGlass');
 // var lulwat = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
+
+
+
+storeLocalStorage();
+function storeLocalStorage(){
+  if(!window.localStorage.imgDataObjectArray){
+    var jsongImgDataObject = JSON.stringify(imgDataObjectArray);
+    localStorage.setItem('imgDataObjectArray', jsongImgDataObject);
+    console.log(localStorage.imgDataObject);
+  }
+}
+
+function retievingStorage(){
+  if(window.localStorage.length !== 0){
+    storedProductData = localStorage.getItem('imgDataObjectArray');
+    productData = JSON.parse(storedProductData);
+    for (var i=0; i < productData.length; i++) {
+      //update clicks and displays on page load from storage data
+      imgDataObjectArray[i].timeShown = productData[i].timeShown;
+      imgDataObjectArray[i].timeClicked = productData[i].timeClicked;
+    }
+
+    imgDataObjectArray = productData;
+  }
+}
+
 
 function displayImage(imgDataObject) {
   var imageDisplaySection = document.getElementById('imgDisplay');
@@ -182,7 +210,7 @@ function restartGame(){
   displayResults.style.display = 'block';
 
 }
-
+retievingStorage();
 display3Images();
 imgEventListener();
 
