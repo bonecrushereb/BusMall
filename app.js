@@ -2,6 +2,7 @@
 
 var imgDataObjectArray = [];
 var tallyRenders = 0;
+var clickDisplayChart = null;
 
 var picObject = function(imgName, path, elementid){
   this.imgName = imgName;
@@ -108,8 +109,19 @@ function imgEventListener(){
   }
 }
 
+function DestroyExistingChart(){
+  if(clickDisplayChart!=null){
+    clickDisplayChart.destroy();
+  }
+}
+
 //Display Chart
 function renderClickDisplayChart(){
+
+  // DestroyExistingChart();
+  // dataArray();
+
+
   var imgName = [];
   var timeClicked = [];
   var timeShown = [];
@@ -147,11 +159,12 @@ var data = {
   // console.log(timeShown);
   // console.log(timeClicked);
   }
-  dataArray();
+ dataArray();
 
 
 var ctx = document.getElementById("myChart").getContext("2d");
-var myBarChart = new Chart(ctx).Bar(data);
+//var myBarChart = new Chart(ctx).Bar(data);
+clickDisplayChart = new Chart(ctx).Bar(data);
 }
 
 function showChartResults(){
@@ -166,6 +179,7 @@ function restartGame(){
   tallyRenders=0;
   document.getElementById('myChart').style.visibility = 'hidden';
   threeNewImages();
+  displayResults.style.display = 'block';
 
 }
 
