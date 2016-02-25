@@ -140,14 +140,15 @@ var data = {
 
     for(var i = 0; i < imgDataObjectArray.length; i++){
       data.labels.push(imgDataObjectArray[i].imgName);
-      data.datasets.push(imgDataObjectArray[i].timeShown);
-      data.datasets.push(imgDataObjectArray[i].timeClicked);
+      data.datasets[0].data.push(imgDataObjectArray[i].timeShown);
+      data.datasets[1].data.push(imgDataObjectArray[i].timeClicked);
     }
   // console.log(imgName);
   // console.log(timeShown);
   // console.log(timeClicked);
   }
   dataArray();
+
 
 var ctx = document.getElementById("myChart").getContext("2d");
 var myBarChart = new Chart(ctx).Bar(data);
