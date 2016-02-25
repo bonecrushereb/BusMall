@@ -1,6 +1,7 @@
 'use strict';
 
 var imgDataObjectArray = [];
+var tallyRenders = 0;
 
 var picObject = function(imgName, path, elementid){
   this.imgName = imgName;
@@ -10,7 +11,7 @@ var picObject = function(imgName, path, elementid){
   this.elementid = elementid;
   imgDataObjectArray.push(this);
   //console.log(elementid);
-}
+};
 
 
 var bag = new picObject('bag', 'assets/img/bag.jpg', 'bag');
@@ -55,21 +56,26 @@ function randomImageIndexs() {
 
   while (randImage1 === randImage2){
     randImage2 = randomImgDataObjectArrayIndex();
-    console.log('Detected Collision')
+    console.log('Detected Collision');
   }
   while (randImage1 === randImage3 || randImage2 === randImage3){
     randImage3 = randomImgDataObjectArrayIndex();
-    console.log('Detected Collision')
+    console.log('Detected Collision');
   }
   return [randImage1,randImage2,randImage3];
 }
 
 function display3Images(){
-  var randomIndexArray = randomImageIndexs();
-  for(var i = 0; i < randomIndexArray.length; i++) {
-    var index = randomIndexArray[i];
-    var picObject = imgDataObjectArray[index];
-    displayImage(picObject);
+  if( tallyRenders < 3){
+    var randomIndexArray = randomImageIndexs();
+    for(var i = 0; i < randomIndexArray.length; i++) {
+      var index = randomIndexArray[i];
+      var picObject = imgDataObjectArray[index];
+      displayImage(picObject);
+    }
+    tallyRenders++;
+  }else{
+    document.getElementById('chartResults');
   }
 }
 
@@ -93,19 +99,20 @@ function imageClicked() {
   threeNewImages();
 }
 
+//document.getelemntby id
+//add event listner
 function imgEventListener(){
   var displayedImages = document.getElementsByTagName('img');
   for(var i = 0; i < displayedImages.length; i++){
     displayedImages[i].addEventListener('click', imageClicked);
   }
 }
-display3Images();
-imgEventListener();
 
 //Display Chart
-var imgName = [];
-var imgClicks = [];
-var imgShown = [];
+function renderClickDisplayChart(){
+  var imgName = [];
+  var timeClicked = [];
+  var timeShown = [];
 
 var data = {
   labels: [],
@@ -129,19 +136,40 @@ var data = {
   ]
 };
 
-function dataArray(){
+  function dataArray(){
 
-  for(var i = 0; i < imgDataObjectArray.length; i++){
-    data.labels.push(imgDataObjectArray[i].imgName);
-    data.datasets.data.push(imgDataObjectArray[i].timeShown);
-    data.datasets.data.push(imgDataObjectArray[i].timeClicked);
+    for(var i = 0; i < imgDataObjectArray.length; i++){
+      data.labels.push(imgDataObjectArray[i].imgName);
+      data.datasets.push(imgDataObjectArray[i].timeShown);
+      data.datasets.push(imgDataObjectArray[i].timeClicked);
+    }
+  // console.log(imgName);
+  // console.log(timeShown);
+  // console.log(timeClicked);
   }
-  console.log(imgName);
-  console.log(timeShown);
-  console.log(timeClicked);
-}
-dataArray();
-
+  dataArray();
 
 var ctx = document.getElementById("myChart").getContext("2d");
 var myBarChart = new Chart(ctx).Bar(data);
+}
+
+function showChartResults(){
+  document.getElementById('myChart').style.visibility = 'visible';
+  this.style.display = 'none';
+  renderClickDisplayChart();
+  again.style.display = 'block';
+}
+
+function restartGame(){
+  this.style.display = 'none';
+  tallyRenders=0;
+  document.getElementById('myChart').style.visibility = 'hidden';
+  threeNewImages();
+
+}
+
+display3Images();
+imgEventListener();
+
+displayResults.addEventListener('click',showChartResults);
+again.addEventListener('click',restartGame);
